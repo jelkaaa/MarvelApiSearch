@@ -1,0 +1,74 @@
+#search-result {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+
+    height: 20px;
+    padding: 5px;
+    background-color: #80ff22;
+    cursor: pointer;
+    display: none;
+}
+
+.search-color {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.list-group-item2 {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #303031eb;
+    border: 1px solid #ddd;
+}
+
+.list-group-item {
+    background-color: #303031eb;
+}
+
+.add__btn {
+    font-size: 35px;
+    background: none;
+    border: none;
+    color: #28B9B5;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.1;
+    margin-left: 10px;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+
+}
+
+body {
+
+    line-height: 1.5em;
+
+    font-size: 14px;
+    background: url(img/Marvel-heroes-4.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: #000;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.pagin {
+    text-align: center;
+}
+
+#searchBox {
+    margin-top: 114px;
+    background-color: #303031eb;
+    color: white;
+}
+
+#resultSrc {
+    text-align: center;
+
+}
