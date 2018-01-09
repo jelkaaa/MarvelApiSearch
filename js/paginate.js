@@ -2,7 +2,7 @@
 
 function pagin() {
     var numberOfItems = $('#resultSrc .list-group-item2').length;
-    console.log(numberOfItems);
+
     var limitPage = 12;
 
     $('#resultSrc .list-group-item2:gt(' + (limitPage - 1) + ')').hide();
@@ -11,7 +11,7 @@ function pagin() {
     $(".pagination").append("<li  id='previous-page'><a href='javascript:void(0)' aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>");
     $(".pagination").append("<li class='current-page active'><a href='javascript:void(0)'>" + 1 + "</a></li>");
 
-    console.log(totalPages);
+
     for (var i = 2; i <= totalPages; i++) {
         $(".pagination").append("<li class='current-page'><a href='javascript:void(0)'>" + i + "</a></li>");
     }

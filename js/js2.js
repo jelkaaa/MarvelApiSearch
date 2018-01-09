@@ -26,6 +26,7 @@ var DOMStrings = {
     resultSrc: '.resultSrc',
     resultLocStr: '.resultLocStr',
     listGroupItem2: 'list-group-item2',
+    listGroupItem: 'list-group-item',
     pagination: '.pagination',
     resultPagination: '.resultPagination'
 };
@@ -50,16 +51,19 @@ function showDetail(hero) {
 function toggle (element) {
     if (element.style.display !== 'none') {
         element.style.display = 'none';
+        document.querySelector('.form-control:focus').style.borderColor='red';
     }
     else {
 
         element.style.display = 'block';
+        document.querySelector('.form-control:focus').style.borderColor='#3fe21c';
 
     }
 }
 //Display results from localStorage if click to search filed
 function searchToggle(search,rez) {
     var i = 0;
+
     search.addEventListener('click', function () {
 
         if (search.value === '') {
@@ -67,7 +71,7 @@ function searchToggle(search,rez) {
             if (i < 1) {
                 i++;
                 showItem();
-
+                storageItems();
             }
             else {
                 toggle(rez);
@@ -89,21 +93,17 @@ function searchFun(allElementHero) {
         if (searchBox.value !== '') {
 
             resultSrc.innerHTML = '';
-            resultSrc.insertAdjacentHTML('beforeend',' <ul class="resultPagination"></ul>');
-
+            resultSrc.insertAdjacentHTML('beforeend','<div class="resultPagination"></div>');
 
             var searchField = searchBox.value;
             var searchExp=new RegExp(searchField,'ig');
             var matches = searchField.match(searchExp);
-
 
             //Listing object from Api
             Array.from(allElementHero).forEach(function (p1) {
                 var title = p1.name;
                 var colorReplace;
                 var showRez;
-
-
 
                 if (title.toLowerCase().indexOf(matches) !== -1) {
 
@@ -113,7 +113,7 @@ function searchFun(allElementHero) {
 
 
                     showRez = resultSrc.insertAdjacentHTML('beforeend', '<li class="list-group-item2 col-lg-3 col-md-3 col-sm-6 col-xs-12 ">' +
-                        ' <img class="img-thumbnail" src="' + p1.thumbnail.path + '/portrait_small.' + p1.thumbnail.extension + '">' +
+                        ' <img class="img-thumbnail" src="' + p1.thumbnail.path + '/portrait_medium.' + p1.thumbnail.extension + '">' +
                         ' <a class="img-responsive" href="' + p1.urls[0].url + '" target="_blank">' + colorReplace + '</a> ' +
                         '<button class="add__btn"  onclick="addItems(' + p1.id + ')"><i class="ion-ios-checkmark-outline"></i></button></li>');//Putting results to HTML documents
 
@@ -125,26 +125,19 @@ function searchFun(allElementHero) {
             resultPagination= document.querySelector(DOMStrings.resultPagination);
             //Insert pagination
             insertPagination(resultPagination,allListGroupItem2);
+
         }
         else {
-
             //If input is empty, show items from localStorage
             showItem();
-
-
+            storageItems();
             //Hidden pagination
             document.querySelector(DOMStrings.pagination).style.display = 'none';
-
-
-
 
             //Hidden elements
             for (var i = 0; i < allListGroupItem2.length; i++) {
                 allListGroupItem2[i].style.display = 'none';
-
             }
-
-
         }
 
     });
@@ -174,24 +167,27 @@ function addItems(id) {
 //Show items from localStorage
 function showItem() {
 
+
     var getStorage;
     var parseGetStorage;
-    for (var i = 0; i < localStorage.length; i++) {
-        var a = localStorage.key(i);
-
-        getStorage = localStorage.getItem(a);
-
-        parseGetStorage = JSON.parse(getStorage);// convert values to JavaScript object
 
 
-        Array.from(parseGetStorage).forEach(function (p1) {
 
-            var showRez = document.querySelector(DOMStrings.resultSrc).innerHTML += '<li class="list-group-item"> <img class="img-thumbnail" src="' + p1.thumbnail.path + '/portrait_small.' + p1.thumbnail.extension + '"> <a class="img-responsive" href="' + p1.urls[0].url + '" target="_blank">' + p1.name + '</a>  </li>';
+        for (var i = 0; i < localStorage.length; i++) {
+            var a = localStorage.key(i);
+
+            getStorage = localStorage.getItem(a);
+
+            parseGetStorage = JSON.parse(getStorage);// convert values to JavaScript object
 
 
-        });
+            Array.from(parseGetStorage).forEach(function (p1) {
 
-    }
+                var showRez = document.querySelector(DOMStrings.resultSrc).innerHTML += '<li class="list-group-item"> <img class="img-thumbnail" src="' + p1.thumbnail.path + '/portrait_medium.' + p1.thumbnail.extension + '"> <a class="img-responsive" href="' + p1.urls[0].url + '" target="_blank">' + p1.name + '</a>  </li>';
+
+
+            });
+        }
 
 }
 
@@ -199,7 +195,7 @@ function insertPagination(rez,item) {
 
 
 
-    rez.insertAdjacentHTML('beforeend', '<div class="pagination"> </div>');
+    rez.insertAdjacentHTML('beforeend', '<div class="pagination"></div>');
 
     pagin();
 
@@ -232,5 +228,14 @@ function insertPagination(rez,item) {
        item[2].classList.add('col-md-4','col-lg-4');
    }
 
+}
+//Checking if have items in localStorage
+function storageItems() {
+
+    var allListGroupItem=document.getElementsByClassName(DOMStrings.listGroupItem);
+    if(allListGroupItem.length === 0) {
+        document.querySelector(DOMStrings.resultSrc).innerHTML += '<li class="list-group-item"><p>You don\'t have any bookmarked Marvel Hero!</p></li>';
+
+    }
 }
 
