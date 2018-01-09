@@ -1,15 +1,6 @@
-#search-result {
-    border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-
-    height: 20px;
-    padding: 5px;
-    background-color: #80ff22;
-    cursor: pointer;
-    display: none;
+.container {
+    margin-bottom: 50px;
 }
-
 .search-color {
     background-color: yellow;
     font-weight: bold;
@@ -22,10 +13,12 @@
     margin-bottom: -1px;
     background-color: #303031eb;
     border: 1px solid #ddd;
+    border-color: rgb(63, 226, 28);
 }
 
 .list-group-item {
     background-color: #303031eb;
+    border-color: rgb(63, 226, 28);
 }
 
 .add__btn {
@@ -48,7 +41,7 @@ input[type=search]::-webkit-search-cancel-button {
 body {
 
     line-height: 1.5em;
-
+    width: 100%;
     font-size: 14px;
     background: url(img/Marvel-heroes-4.jpg) no-repeat center center fixed;
     background-size: cover;
@@ -71,4 +64,22 @@ body {
 #resultSrc {
     text-align: center;
 
+}
+.form-control:focus{
+    border-color: rgb(63, 226, 28);
+
+}
+p {
+    color: rgb(63, 226, 28);
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 24px;
+    margin: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+        background: url(img/MarvelMobile.jpg)no-repeat center center fixed;
+        background-size:cover;
+    }
 }
